@@ -19,35 +19,7 @@ class admin extends Component {
             webSite: '',
             experience: props
           
-            // aOject: {
-            //     nameUser: '',
-            //     id: '',
-            //     dateBirth: '',
-            //     gtsx: '',
-            //     phone: '',
-            //     email: '',
-            //     dc: '',
-            //     webSite: '',
-            //     detailTitle: [{
-            //         id: 1,
-            //         experience: "",
-            //         experienceDetail: [
-            //             {
-            //                 id: 1,
-            //                 nameExperience: "",
-            //                 times: "",
-            //                 list: [
-            //                     {
-            //                         id: 1,
-            //                         content: " "
-            //                     }
-
-            //                 ]
-            //             }
-            //         ]
-            //     }
-            //     ],
-            // },
+           
 
         }
         console.log(props,"dddddddddddddđ");
