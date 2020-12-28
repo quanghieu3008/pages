@@ -1,0 +1,66 @@
+
+{
+    "items": [
+    {
+        "id": 1,
+        "nameUser": "Vũ Quang ",
+        "dateBirth": "11/11/2011",
+        "gtsx": "Nam",
+        "phone": "0123456789",
+        "email": "taan300897@gmail.com",
+        "dc": "Số 15 tổ 20 , Lĩnh Nam, Hoàng Mai , Hà Nội",
+        "webSite": "https://www.facebook.com/hieu.vu.549",
+        "detailTitle": [
+            {
+                "id": 1,
+                "experience": "KỸ NĂNG",
+                "experienceDetail": [
+                    {
+                        "id": 1,
+                        "nameExperience": "Lập trình",
+                        "times": "12/2019 - NAY",
+                        "list": [
+                            {
+                                "id": 1,
+                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
+                            },
+                            {
+                                "id": 2,
+                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "experience": "KỸ NĂNG",
+                "experienceDetail": [
+                    {
+                        "id": 1,
+                        "nameExperience": "Lập trình",
+                        "times": "08/2020 - 11/2020",
+                        "list": [
+                            {
+                                "id": 1,
+                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
+                            },
+                            {
+                                "id": 2,
+                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
+}
+
+
+
+
+
+
+
