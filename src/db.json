@@ -1,66 +1,57 @@
-
 {
-    "items": [
+  "item": [
     {
-        "id": 1,
-        "nameUser": "Vũ Quang ",
-        "dateBirth": "11/11/2011",
-        "gtsx": "Nam",
-        "phone": "0123456789",
-        "email": "taan300897@gmail.com",
-        "dc": "Số 15 tổ 20 , Lĩnh Nam, Hoàng Mai , Hà Nội",
-        "webSite": "https://www.facebook.com/hieu.vu.549",
-        "detailTitle": [
-            {
-                "id": 1,
-                "experience": "KỸ NĂNG",
-                "experienceDetail": [
-                    {
-                        "id": 1,
-                        "nameExperience": "Lập trình",
-                        "times": "12/2019 - NAY",
-                        "list": [
-                            {
-                                "id": 1,
-                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
-                            },
-                            {
-                                "id": 2,
-                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "experience": "KỸ NĂNG",
-                "experienceDetail": [
-                    {
-                        "id": 1,
-                        "nameExperience": "Lập trình",
-                        "times": "08/2020 - 11/2020",
-                        "list": [
-                            {
-                                "id": 1,
-                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
-                            },
-                            {
-                                "id": 2,
-                                "content": " Làm việc được với Công nghệ ReactJS và React Native"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+      "nameUser": "Vũ Quang Hiếu",
+      "dateBirth": "11/11/2011",
+      "gtsx": "Nam",
+      "phone": "0123456789",
+      "email": "taan300897@gmail.com",
+      "dc": " Lĩnh Nam, Hoàng Mai , Hà Nội",
+      "webSite": "https://www.facebook.com/hieu.vu"
     }
-]
+  ],
+  "information": [
+    {
+      "content": "Some quick example text to build on the card title and make up the bulk ofthe card's conte\nSome quick example text to build on the card title and make up the bulk ofthe card's conte",
+      "title": "Done",
+      "description": "Some quick example text to build on the card title and make up the bulk ofthe card's conte",
+      "date": "31-12-2020",
+      "id": 3
+    },
+    {
+      "content": "xvSome quick example text to build on the card title and make up the bulk ofthe card's conte",
+      "title": "Some quick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "description": "Some quick example text to build on the card title and make up the bulk ofthe card's conte",
+      "date": "31-12-2020",
+      "id": 4
+    },
+    {
+      "content": "Some quick example text to build on the card title and make up the bulk ofthe card's content. Some quick example text to build on the card title and make up the bulk ofthe card's content. Some quick example text to build on the card title and make up the bulk ofthe card's content. Some quick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "title": "Some quick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "description": "Some quick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "date": "31-12-2020",
+      "id": 5
+    },
+    {
+      "content": "sSome quick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "title": "Some quick example text to build on the card title and make up the bulk ofthe card's conte",
+      "description": "Some quick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "date": "31-12-2020",
+      "id": 6
+    },
+    {
+      "content": "1",
+      "title": "Some quick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "description": "kkjuikiquick example text to build on the card title and make up the bulk ofthe card's content. ",
+      "date": "31-12-2020",
+      "id": 7
+    },
+    {
+      "content": "0989894094",
+      "title": "0989894094",
+      "description": "0989894094",
+      "date": "31-12-2020",
+      "id": 8
+    }
+  ]
 }
-
-
-
-
-
-
-

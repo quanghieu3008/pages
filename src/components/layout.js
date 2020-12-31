@@ -7,10 +7,11 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql,Link } from "gatsby"
 
 import Header from "./header"
 import "./layout.css"
+// import { Link } from "react-router-dom"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -33,7 +34,9 @@ const Layout = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
+    
         <main>{children}</main>
+        
         <footer style={{
           marginTop: `2rem`
         }}>

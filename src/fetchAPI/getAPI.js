@@ -1,6 +1,6 @@
 export default function callApiGet(){
     return new Promise((resolve,reject)=>{
-        const url='http://localhost:3001/items'
+        const url='http://localhost:3001/item'
         fetch(url,{
             method:'GET'
         })
