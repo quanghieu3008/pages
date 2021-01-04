@@ -1,6 +1,6 @@
 export default function callApiGet(){
     return new Promise((resolve,reject)=>{
-        const url='http://localhost:3001/information'
+        const url='http://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/blogs'
         fetch(url,{
             method:'GET'
         })

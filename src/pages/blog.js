@@ -54,7 +54,7 @@ const Yourself = () => {
     }
     const get = () => {
         callApiGetDetail()
-            .then(data => setUsersDetail(data));
+            .then(data => setUsersDetail(data.items));
 
     }
     const addContent = () => {
@@ -113,7 +113,7 @@ const Yourself = () => {
     const onHandleSearchMore = () => {
         searchContentAPI(textSearch)
             .then((res) => {
-                setUsersDetail(res)
+                setUsersDetail(res.items)
             })
     }
 

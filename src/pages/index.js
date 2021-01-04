@@ -12,9 +12,9 @@ const Yourself = () => {
   }, []);
   const getAll = () => {
     callApiGet()
-      .then(data => setUsers(data));
+      .then(data => setUsers(data.item));
     callApiGetDetail()
-      .then(dataContent => setUsersDetail(dataContent));
+      .then(dataContent => setUsersDetail(dataContent.items));
 
   }
   return (

@@ -32,7 +32,7 @@ const Admin = () => {
     }, []);
     const get = () => {
         callApiGet()
-            .then(data => setUsersDetail(data));
+            .then(data => setUsersDetail(data.item));
 
     }
     const onHandleEdit = (item) => {
@@ -83,7 +83,7 @@ const Admin = () => {
                         <p>Welcome to the edit info page</p>
                         
                         <div>
-                        <Button  variant="outline-success"  onClick={() => onHandleEdit(item)}> Edit Contents</Button>
+                        <Button  variant="outline-success"  onClick={() => onHandleEdit(item)}>Edit Profile</Button>
                         </div>
                         <Link to="/">Go back to the Blog</Link>
                         </div>
@@ -98,7 +98,7 @@ const Admin = () => {
                 >
                     <Modal.Header closeButton onClick={() => setShowScreenAdd(false)}>
                         <Modal.Title id="example-modal-sizes-title-lg">
-                            checkStatus
+                            Profile
                     </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
