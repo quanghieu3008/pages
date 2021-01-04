@@ -8,9 +8,11 @@ export default (props) => {
   const [radioValue, setRadioValue] = useState('1');
 
   const radios = [
-    {name: 'Active', userName: 'Info', value: '1',link:'/' },
-    {name: 'Radio', userName: 'Edit', value: '2' ,link:'/blog'},
+    {name: 'Active', userName: 'Blog', value: '1',link:'/' },
+    {name: 'Radio', userName: 'Edit Blog', value: '2' ,link:'/blog'},
+    {name: 'Radio', userName: 'profile', value: '4' ,link:'/admin'},
     {name: 'Radio', userName: 'Hello', value: '3' ,link:'/page-2'},
+    
   ];
   const handleValue=(e)=>{
     setRadioValue(e.currentTarget.value)
@@ -30,15 +32,10 @@ export default (props) => {
               key={idx}
               type="radio"
                variant="secondary"
-              // name="radio"
+        
                value={radio.value}
-              
-            
-              // onChange={(e)=> setRadioValue(e.currentTarget.value,navigate(radio.link))}
-              // checked={radioValue === radio.value}
               onClick={event => {
                 event.preventDefault()
-                // TODO: do something with form values
                 navigate(radio.link)
               }}
             >

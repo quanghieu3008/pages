@@ -1,227 +1,152 @@
-// import React, { Component } from 'react';
-// import { Container, Row, Col, Card, Button, Form, Modal, Image, Navbar, NavDropdown, Nav, FormControl } from 'react-bootstrap'
-// import callApiGet from '../fetchAPI/getAPI'
-// import updateAPI from '../fetchAPI/upDataFile'
-// class admin extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             checkInput: false,
-//             dataEdit: [],
-//             nameUser: '',
-//             id: '',
-//             dateBirth: '',
-//             gtsx: '',
-//             phone: '',
-//             email: '',
-//             dc: '',
-//             webSite: '',
-//             experience: props
+
+import React, { useEffect, useState } from "react"
+
+import { Modal, Form, Button } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Menu from "../components/menu";
+import callApiGet from '../fetchAPI/getAPI'
+import "../style/blog.css"
+import updateUserAPI from "../fetchAPI/updateUserAPI"
+import { Link } from "gatsby"
+
+const Admin = () => {
+
+    const [faceUser, setFaceUser] = useState({});
+    const [userDetail, setUsersDetail] = useState([]);
+    const [id, setId] = useState('')
+    const [nameUser, setNameUser] = useState('')
+    const [dateBirth, setDateBirth] = useState('')
+    const [gtsx, setGtsx] = useState('')
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [dc, setDc] = useState('');
+    const [webSite, setWebSite] = useState('');
+    const [showScreen, setShowScreen] = useState(false);
+    const [showScreenAdd, setShowScreenAdd] = useState(false);
+
+
+    useEffect(() => {
+        get();
+        
+    }, []);
+    const get = () => {
+        callApiGet()
+            .then(data => setUsersDetail(data));
+
+    }
+    const onHandleEdit = (item) => {
+        console.log(item, "item----------");
+        setShowScreenAdd(true);
+        setNameUser(item.nameUser)
+        setDateBirth(item.dateBirth)
+        setGtsx(item.gtsx)
+        setPhone(item.phone)
+        setDc(item.dc)
+        setEmail(item.email)
+        setWebSite(item.webSite)
+        setId(item.id)
+
+    }
+    const updateContent = () => {
+        if (nameUser && dateBirth && gtsx && phone && gtsx && email && dc && webSite !== "") {
+            updateUserAPI({
+                nameUser: nameUser,
+                dateBirth: dateBirth,
+                gtsx: gtsx,
+                phone: phone,
+                email: email,
+                dc: dc,
+                webSite: webSite,
+                id: id
+            })
+                .then((res) => {
+                    get();
+                    setShowScreenAdd(false);
+                })
+                .catch((error) => {
+                    alert("Error!")
+                });
+        }
+        else alert("Not empty")
+    }
+    console.log(userDetail, "detail lisst ===================");
+    return (
+        <div>
+            <Menu title={"Blog"} />
+
+            <div>
+                {userDetail.map((item, key) => {
+                    return (
+                        <div>
+                        <h1>Hi from the second page</h1>
+                        <p>Welcome to the edit info page</p>
+                        
+                        <div>
+                        <Button  variant="outline-success"  onClick={() => onHandleEdit(item)}> Edit Contents</Button>
+                        </div>
+                        <Link to="/">Go back to the Blog</Link>
+                        </div>
+                    )
+                })}
+
+                <Modal
+                    size="lg"
+                    show={showScreenAdd}
+                    onHide={() => setShowScreenAdd(false)}
+                    aria-labelledby="example-modal-sizes-title-lg"
+                >
+                    <Modal.Header closeButton onClick={() => setShowScreenAdd(false)}>
+                        <Modal.Title id="example-modal-sizes-title-lg">
+                            checkStatus
+                    </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form noValidate validated={true} onSubmit={() => updateContent} >
+
+                            <Form.Group controlId="exampleForm.ControlInput1">
+                                <Form.Label>User Name </Form.Label>
+                                <Form.Control defaultValue={nameUser} type="title" placeholder="User Name" required onChange={(e) => { setNameUser(e.target.value) }} />
+                            </Form.Group>
+                            <Form.Group controlId="exampleForm.ControlInput2">
+                                <Form.Label>Date </Form.Label>
+                                <Form.Control defaultValue={dateBirth} type="date" placeholder="Date" required onChange={(e) => { setDateBirth(e.target.value) }} />
+                            </Form.Group>
+                            <Form.Group controlId="exampleForm.ControlInput3">
+                                <Form.Label>GT </Form.Label>
+                                <Form.Control defaultValue={gtsx} type="title" placeholder="GT" required onChange={(e) => { setGtsx(e.target.value) }} />
+                            </Form.Group>
+                            <Form.Group controlId="exampleForm.ControlInput4">
+                                <Form.Label>Phone </Form.Label>
+                                <Form.Control defaultValue={phone} type="title" placeholder="Phone" required onChange={(e) => { setPhone(e.target.value) }} />
+                            </Form.Group>
+                            <Form.Group controlId="exampleForm.ControlInput5">
+                                <Form.Label>Email </Form.Label>
+                                <Form.Control defaultValue={email} type="title" placeholder="Email" required onChange={(e) => { setEmail(e.target.value) }} />
+                            </Form.Group>
+
+                            <Form.Group controlId="exampleForm.ControlInput6">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control defaultValue={dc} type="title" placeholder="Address" required onChange={(e) => { setDc(e.target.value) }} />
+                            </Form.Group>
+                            <Form.Group controlId="exampleForm.ControlInput6">
+                                <Form.Label>WebSite </Form.Label>
+                                <Form.Control defaultValue={webSite} type="title" placeholder="WebSite" required onChange={(e) => { setWebSite(e.target.value) }} />
+                            </Form.Group>
+                        </Form>
+                        <Button variant="primary" type="submit" onClick={updateContent} >Save</Button>
+
+                    </Modal.Body>
+                </Modal>
+
+            </div>
 
 
 
-//         }
-//         console.log(props, "dddddddddddddđ");
-//     }
-//     componentDidMount = () => {
-//         callApiGet()
-//             .then(data => {
-//                 this.setState({
-//                     dataEdit: data
-//                 })
-//                 // callApiGet()
-//             })
-//     }
-//     setInput = () => {
-//         this.setState({
-//             checkInput: !this.state.checkInput
-//         })
-//     }
-//     handleUpdate = (datas) => {
-//         // let page = {
-//         //     id: this.state.id,
-//         //     nameUser: this.state.nameUser
-//         // }
-//         updateAPI({
-//             id: this.state.id,
-//             nameUser: this.state.nameUser
-//         })
-//     }
-//     handleChange = (item) => {
-//         this.setState({
-//             id: item.id,
-//             nameUser: item.nameUser,
-//             dateBirth: item.dateBirth,
-//             gtsx: item.gtsx,
-//             phone: item.phone,
-//             email: item.email,
-//             dc: item.dc,
-//             webSite: item.webSite
-//         })
-//     }
-//     handleChangeTime = (e) => {
-
-//         const { nameUser, dateBirth, gtsx, phone, email, dc, webSite } = this.state.dataEdit || ''
-//         this.setState({
-//             nameUser: e.target.value
-//         })
-//     }
-//     handleChangeNumber = (e) => {
-//         this.setState({
-//             experience: e.target.value
-//         })
-//     }
-//     render() {
-//         // const { dataEdit } = this.state || []
-//         console.log(this.state.experience, "tess loggggggggggggggggggggggg");
-//         let ListData = []
-
-//         ListData = this.state.dataEdit.map((item, key) => {
-//             return (
-//                 <div key={key}  >
-//                     <button onClick={() => this.handleChange(item)}>Sửa</button>
-//                     <table  >
-//                         <tr >
-//                             <th>STT</th>
-//                             <th>
-//                                 Detail
-//                             </th>
+        </div>
+    );
+}
 
 
-//                         </tr>
-//                         <tr>
-//                             <td>Tên:</td>
-//                             <input className="inputType" value={this.state.nameUser}
-//                                 onChange={(e) => {
-//                                     this.setState({
-//                                         nameUser: e.target.value
-//                                     })
-//                                 }}
-//                             ></input>
 
-//                         </tr>
-//                         <tr>
-//                             <td>Ngày sinh:</td>
-//                             <input className="inputType" value={this.state.dateBirth}
-//                                 onChange={(e) => {
-//                                     this.setState({
-//                                         dateBirth: e.target.value
-//                                     })
-//                                 }}
-//                             ></input>
-
-//                         </tr>
-//                         <tr>
-//                             <td>Giới tính :</td>
-//                             <input className="inputType" value={this.state.gtsx}
-//                                 onChange={(e) => {
-//                                     this.setState({
-//                                         gtsx: e.target.value
-//                                     })
-//                                 }}
-//                             ></input>
-
-//                         </tr>
-//                         <tr>
-//                             <td>Điện thoại:</td>
-//                             <input className="inputType" value={this.state.phone}
-//                                 onChange={(e) => {
-//                                     this.setState({
-//                                         phone: e.target.value
-//                                     })
-//                                 }}
-//                             ></input>
-//                         </tr>
-//                         <tr>
-//                             <td>Email:</td>
-//                             <input className="inputType" value={this.state.email}
-//                                 onChange={(e) => {
-//                                     this.setState({
-//                                         email: e.target.value
-//                                     })
-//                                 }}
-//                             ></input>
-//                         </tr>
-//                         <tr>
-//                             <td>Địa chỉ:</td>
-//                             <input className="inputType" value={this.state.dc}
-//                                 onChange={(e) => {
-//                                     this.setState({
-//                                         dc: e.target.value
-//                                     })
-//                                 }}
-//                             ></input>
-
-//                         </tr>
-//                         <tr>
-//                             <td>Website:</td>
-//                             <input className="inputType" value={this.state.webSite}
-//                                 onChange={(e) => {
-//                                     this.setState({
-//                                         webSite: e.target.value
-//                                     })
-//                                 }}
-//                             ></input>
-
-//                         </tr>
-//                     </table>
-
-//                     {
-//                         item && item.detailTitle ? item.detailTitle.map((itemExperience) => {
-//                             return (
-//                                 <div className="component-detail">
-//                                     <div className="title">
-//                                         <h4>
-//                                             {itemExperience.experience}
-//                                         </h4>
-//                                         <input className="inputType" value={this.state.experience}
-//                                             onChange={this.handleChangeNumber}
-//                                         ></input>
-//                                     </div>
-//                                     {
-//                                         itemExperience && itemExperience.experienceDetail ? itemExperience.experienceDetail.map((itemDetail) => {
-//                                             return (
-//                                                 <div className="title-detail">
-//                                                     <div className="border-title">
-//                                                         <b>{itemDetail.nameExperience} </b>
-//                                                         <p> {itemDetail.times}</p>
-//                                                     </div>
-//                                                     <div>
-//                                                         {itemDetail && itemDetail.list ? itemDetail.list.map((itemList) => {
-//                                                             return (
-//                                                                 <div className="title-content" >
-//                                                                     <p>{itemList.content}</p>
-//                                                                 </div>
-//                                                             )
-//                                                         })
-//                                                             : <div></div>
-//                                                         }
-//                                                     </div>
-//                                                 </div>
-//                                             )
-//                                         })
-//                                             : <div></div>
-//                                     }
-//                                 </div>
-//                             )
-//                         })
-//                             : <div></div>
-//                     }
-//                 </div>
-//             )
-//         })
-//         const { dataEdit } = this.state
-//         const { nameUser, dateBirth, gtsx, phone, email, dc, webSite } = this.state.dataEdit || ''
-//         return (
-
-//             <div >
-
-//                 {ListData}
-
-
-//             </div>
-//         );
-//     }
-// }
-
-// export default admin
+export default Admin;
