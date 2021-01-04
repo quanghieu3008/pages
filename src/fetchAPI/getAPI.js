@@ -1,6 +1,6 @@
 export default function callApiGet(){
     return new Promise((resolve,reject)=>{
-        const url='http://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/item'
+        const url='https://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/item'
         fetch(url,{
             method:'GET'
         })
