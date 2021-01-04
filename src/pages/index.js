@@ -4,7 +4,7 @@ import "../style/blog.css"
 import callApiGet from '../fetchAPI/getAPI'
 import Menu from "../components/menu";
 import callApiGetDetail from "../fetchAPI/upDataFile"
-const Yourself = () => {
+const YourselfProflie = () => {
   const [users, setUsers] = useState([]);
   const [usersDetail, setUsersDetail] = useState([]);
   useEffect(() => {
@@ -85,5 +85,5 @@ const Yourself = () => {
     </div>
   )
 }
-export default Yourself
+export default YourselfProflie
 

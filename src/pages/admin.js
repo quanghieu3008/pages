@@ -70,7 +70,6 @@ const Admin = () => {
         }
         else alert("Not empty")
     }
-    console.log(userDetail, "detail lisst ===================");
     return (
         <div>
             <Menu title={"Blog"} />
@@ -78,7 +77,7 @@ const Admin = () => {
             <div>
                 {userDetail.map((item, key) => {
                     return (
-                        <div>
+                        <div key={key}>
                         <h1>Hi from the second page</h1>
                         <p>Welcome to the edit info page</p>
                         

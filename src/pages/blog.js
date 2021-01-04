@@ -8,9 +8,7 @@ import deleteContentAPI from "../fetchAPI/deleteContentAPI"
 import updateContentAPI from "../fetchAPI/updateContentAPI"
 import searchContentAPI from "../fetchAPI/searchContentAPI"
 import "../style/blog.css"
-function mapData() {
 
-}
 const Yourself = () => {
     const today = new Date();
     let date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
@@ -118,13 +116,11 @@ const Yourself = () => {
     }
 
     return (
-        <div  >
+        <div>
             <Menu title={"Blog"} />
-
-
             <div className="input-search">
                 <Button className="right-search" onClick={() => onHandleShowAdd()} variant="outline-success"  >Add</Button>
-                <input defaultValue={textSearch} type="text" class="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1" onChange={handleSearch} />
+                <input defaultValue={textSearch} type="text" className="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1" onChange={handleSearch} />
                 <Button className="right-search" onClick={onHandleSearchMore} variant="info" >Search</Button>
             </div>
 
@@ -140,10 +136,10 @@ const Yourself = () => {
                                     <Card.Text >
                                         {item.description}
                                     </Card.Text>
-                                 
-                                    <small style={{display:"flex",alignSelf:'flex-end'}} class="text-muted"> {item.date}</small>
+
+                                    <small style={{ display: "flex", alignSelf: 'flex-end' }} className="text-muted"> {item.date}</small>
                                 </Card.Body>
-                               
+
                                 <Card.Footer>
                                     <div className="button-handle">
                                         <Button onClick={() => onHandleShow(item)} type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Detail</Button>
@@ -163,14 +159,14 @@ const Yourself = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form validated={showScreen}>
-                        <Form.Label style={{fontWeight:'bold'}} >{dataNew.description}</Form.Label>
-                        
-                        <p class="text-left">{dataNew.content}</p>
+                        <Form.Label style={{ fontWeight: 'bold' }} >{dataNew.description}</Form.Label>
+
+                        <p className="text-left">{dataNew.content}</p>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button type="submit">Done </Button>
-                <small class="text-muted">{dataNew.date}</small>
+                    <Button type="submit">Done </Button>
+                    <small className="text-muted">{dataNew.date}</small>
                 </Modal.Footer>
             </Modal>
             <Modal
