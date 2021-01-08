@@ -8,8 +8,8 @@ export default (props) => {
   const radios = [
     { name: 'Active', userName: 'Blog', value: '1', link: '/' },
     { name: 'Radio', userName: 'Edit Blog', value: '2', link: '/blog' },
-    { name: 'Radio', userName: 'profile', value: '4', link: '/admin' },
-    { name: 'Radio', userName: 'Hello', value: '3', link: '/page-2' },
+    // { name: 'Radio', userName: 'profile', value: '4', link: '/admin' },
+    // { name: 'Radio', userName: 'Hello', value: '3', link: '/page-2' },
 
   ];
   return (

@@ -15,7 +15,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
 
 // exports.createPages = async function ({ actions, graphql }) {
-//     console.log("chạy");
+
 //     const { data } = await graphql(`
 //       query {
 //         allMarkdownRemark {

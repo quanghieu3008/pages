@@ -4,9 +4,11 @@ import "../style/blog.css"
 import callApiGet from '../fetchAPI/getAPI'
 import Menu from "../components/menu";
 import callApiGetDetail from "../fetchAPI/upDataFile"
+import callApiGetImg from "../fetchAPI/getImgAPI"
 const YourselfProflie = () => {
   const [users, setUsers] = useState([]);
   const [usersDetail, setUsersDetail] = useState([]);
+  const [UrlImage, setUrlImage] = useState([]);
   useEffect(() => {
     getAll();
   }, []);
@@ -15,14 +17,31 @@ const YourselfProflie = () => {
       .then(data => setUsers(data.item));
     callApiGetDetail()
       .then(dataContent => setUsersDetail(dataContent.items));
-
+    callApiGetImg()
+      .then(dataImg => setUrlImage(dataImg.items));
   }
   return (
 
     <div>
-      <Menu title={"Blog"} />
+      <Menu />
       <div className="container">
         <div className="blog">
+          <div className="img-home">
+            {
+              UrlImage.map((item, key) => {
+                return (
+             
+                   
+                      <div className="item-user-home" key={key} >
+                        <img className="image-see-home" src={item.avatar ? item.avatar : ""} />
+                      </div> 
+                    
+             
+                )
+              })
+            }
+
+          </div>
           {
             users.map((users, key) => {
               return (

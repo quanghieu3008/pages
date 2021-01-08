@@ -1,6 +1,6 @@
-export default function updateUserAPI(player){
+export default function updateImgAPI(player){
     return new Promise((resolve,reject)=>{
-        const url ='https://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/item/'+player.id;
+        const url ='https://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/dataImg/'+player.id;
         fetch(url,{
             method:'PUT',
             headers:{"Content-type":"application/json"},

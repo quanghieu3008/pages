@@ -6,7 +6,6 @@ export default function callApiGet(){
         })
         .then((response)=>response.json())
         .then((res)=>{
-            console.log(res,"hey::::::::::::::::::");
             resolve(res)
             console.log(res);
         })
