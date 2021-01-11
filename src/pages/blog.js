@@ -6,14 +6,13 @@ import addContentAPI from "../fetchAPI/addContentAPI"
 import Menu from "../components/menu";
 import deleteContentAPI from "../fetchAPI/deleteContentAPI"
 import updateContentAPI from "../fetchAPI/updateContentAPI"
-import searchContentAPI from "../fetchAPI/searchContentAPI"
 import callApiGetImg from "../fetchAPI/getImgAPI"
 import updateImgAPI from "../fetchAPI/updateImgAPI"
 import "../style/blog.css"
 import Admin from "./admin"
-import PaginationCommon from "./paginations"
 import callApiGetPagination from "../fetchAPI/getPaginationAPI"
-import PaginationPage from "../pages/paginationPage"
+import Pagination from 'react-bootstrap/Pagination';
+
 const Yourself = () => {
     const today = new Date();
     let date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
@@ -26,60 +25,34 @@ const Yourself = () => {
     const [showScreenAdd, setShowScreenAdd] = useState(false);
     const [checkStatus, setCheckStatus] = useState("");
     const [textSearch, setTextSearch] = useState("");
-
     const [UrlImage, setUrlImage] = useState([]);
     const [ImageUser, setImageUser] = useState(null);
-    let totalSlide = Math.ceil(usersDetailTotal / 3)
-
-    const [listDataItem, setListDataItem] = useState([])
-    const [activePageStatus, setActivePageStatus] = useState(1)
-    const [totalPage, setTotalPage] = useState(10)
-    // let totalNumberPage = Math.ceil(usersDetail.count / 3)
+    let totalSlide = Math.ceil(usersDetailTotal / 6)
     const [dataPageToDo, setDataPageToDo] = useState([])
-
-    console.log(usersDetailTotal, "eeeeeeeeeeeeeeeeeeee", totalSlide);
     const [pagination, setPagination] = useState({
         page: 1,
-        limit: 3,
-        // totalRow: totalSlide,
+        limit: 6,
+        search: ""
     })
     useEffect(() => {
-        get(1);
+        get();
 
     }, []);
 
     const handlePageChange = (newPage) => {
-        console.log(newPage, "so trang ------ sau bam");
-        setPagination({
-            ...pagination,
-            page: newPage
-        })
-        console.log(pagination.page, "so trang ------ sau bam save");
+        setPagination(newPage)
         handleGetPagination(newPage)
     }
 
     const handleGetPagination = (pages) => {
-        console.log(pages, 'page input------------+++');
         callApiGetPagination(pages)
             .then(dataPagination => {
-
-                setDataPageToDo(dataPagination.items)
+                setDataPageToDo(dataPagination.items);
                 if (dataPagination.items.length === 0) {
-
-                    handlePageChange(pages - 1)
-                    // setPagination({
-                    //     ...pagination,
-                    //     page: pages - 1
-                    // });
-                    
-                    // totalSlide = pages - 1
-                    console.log(totalSlide, "end delete --------------", pagination.page, "hiện tại", pages);
+                    handlePageChange({ ...pagination, page: pagination.page - 1 })
                 };
-                console.log(dataPagination, "page data")
             });
-
     }
-    // console.log(totalNumberPage, "number ============");
     const onHandleEdit = (item) => {
         setShowScreenAdd(true);
         setDataNew(item)
@@ -103,34 +76,25 @@ const Yourself = () => {
         setDataNew(item)
     }
     const get = (data) => {
-        handleGetPagination(1);
-        console.log("---------------------------data");
-        callApiGetDetail()
+        handleGetPagination({ ...pagination, page: 1 });
+        callApiGetDetail(pagination.search)
             .then(data => {
                 setUsersDetailTotal(data.count)
-                // setListDataItem(data.items)
-                console.log("---------------------------data", data, "user tasssss", usersDetailTotal);
             });
         callApiGetImg()
             .then(dataImg => setUrlImage(dataImg.items));
-
     }
-
     const hanldeNextPage = () => {
-        handleGetPagination(totalSlide);
-
-        if (dataPageToDo.length >= pagination.limit) {
+        if (usersDetailTotal % pagination.limit === 0) {
             getNewPage()
+            handleGetPagination({ ...pagination, page: totalSlide + 1 });
         }
-
-
     }
     const getNewPage = () => {
-        callApiGetDetail()
+        callApiGetDetail(pagination.search)
             .then(data => {
                 setUsersDetailTotal(data.count)
-                handlePageChange(totalSlide + 1)
-                console.log("---------------------------data", data, "user tasssss", usersDetailTotal);
+                handlePageChange({ ...pagination, page: totalSlide + 1 })
             });
     }
     const addContent = () => {
@@ -138,7 +102,7 @@ const Yourself = () => {
         if (content && title && description !== "") {
             addContentAPI(dataNew)
                 .then((res) => {
-                    handleGetPagination(pagination.page);
+                    handleGetPagination(pagination);
                     setShowScreenAdd(false);
                     hanldeNextPage()
                     setUsersDetailTotal(usersDetailTotal + 1)
@@ -155,7 +119,7 @@ const Yourself = () => {
         if (content && title && description !== "") {
             updateContentAPI(dataNew)
                 .then((res) => {
-                    handleGetPagination(pagination.page);
+                    handleGetPagination(pagination);
                     setShowScreenAdd(false);
                     alert("Success!");
                 })
@@ -169,9 +133,7 @@ const Yourself = () => {
 
         deleteContentAPI(id)
             .then((res) => {
-                // if(dataPageToDo.length===0){}
-                handleGetPagination(pagination.page);
-                console.log(res, "data loeg-----------------");
+                handleGetPagination(pagination);
                 setShowModalComfirm(false);
                 setUsersDetailTotal(usersDetailTotal - 1)
             })
@@ -180,28 +142,11 @@ const Yourself = () => {
             });
     }
     const handleSearch = (e) => {
-        setTextSearch(e.target.value)
-
-    }
-
-    const onHandleSearchMore = () => {
-        searchContentAPI(textSearch)
-            .then((res) => {
-                setUsersDetailTotal(res.items)
-            })
+        setPagination({ ...pagination, search: e.target.value, page: 1 })
     }
     const HandleComfirm = (item) => {
         setShowModalComfirm(true)
         setId(item)
-
-
-
-
-
-
-
-
-
     }
     const onHandleImage = event => {
         if (event.target.files && event.target.files[0]) {
@@ -223,10 +168,20 @@ const Yourself = () => {
                 alert("Error!")
             });
     }
-    console.log(pagination.page, "|||||||||", totalSlide,"{{{{{{{{{{{{{Ơ",usersDetailTotal);
+    const { page } = pagination
+    let pageLists = []
+    for (let i = 1; i <= totalSlide; i++) {
+        pageLists.push(
+            <Pagination.Item key={i} active={i === page} onClick={() => handlePageChange({ ...pagination, page: i })}>
+                {i}
+            </Pagination.Item>
+        );
+    }
+    const paginationBasic = (<Pagination >{pageLists}</Pagination>)
     return (
-        <div>
-            <Menu title={"Blog"} />
+        <div >
+
+            <Menu  />
             <div className="input-search">
                 <div className="admin-profile">
 
@@ -236,43 +191,11 @@ const Yourself = () => {
                 </div>
                 <div className="admin-profile">
                     <input defaultValue={textSearch} type="text" className="form-control" placeholder="Search..." aria-label="Username" aria-describedby="basic-addon1" onChange={handleSearch} />
-                    <Button className="right-search" onClick={onHandleSearchMore} variant="info" >Search</Button>
+                    <Button className="right-search" onClick={get} variant="info" >Search</Button>
                 </div>
 
             </div>
-            <div className="input-search">
-                <div>
-                    <div>
-                        <input type="file" onChange={onHandleImage}></input>
-                    </div>
-                    <Button className="upload-img btn btn-outline-warning" onClick={onHandleUpdateImg} variant="info" >Save</Button>
-
-                </div>
-
-                {
-                    UrlImage.map((item, key) => {
-                        return (
-                            <div className="item-user" key={key} >
-                                <img className="image-see" src={ImageUser ? ImageUser : item.avatar} />
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            <div>
-                <div>
-                    <button
-                        disabled={pagination.page <= 1}
-                        onClick={() => handlePageChange(pagination.page - 1)}>
-                        Prev
-            </button>
-                    <button
-                        disabled={pagination.page >= totalSlide}
-                        onClick={() => handlePageChange(pagination.page + 1)}>
-                        Next
-        </button>
-                </div>
-            </div>
+ 
             <div className="list-title">
                 {
                     dataPageToDo.map((item, key) => {
@@ -300,11 +223,8 @@ const Yourself = () => {
 
             </div>
 
-            <div>
-                <PaginationPage
-                    pagination={pagination}
-                    onPageChange={handlePageChange}
-                />
+            <div className="list-title">
+                {paginationBasic}
             </div>
             <Modal show={showScreen}>
                 <Modal.Header closeButton onClick={() => setShowScreen(false)}>
@@ -367,15 +287,27 @@ const Yourself = () => {
                 </Modal.Body>
 
             </Modal>
-        </div>
+        </div >
     )
 }
 export default Yourself
 
+// <div className="input-search">
+// <div>
+//     <div>
+//         <input type="file" onChange={onHandleImage}></input>
+//     </div>
+//     <Button className="upload-img btn btn-outline-warning" onClick={onHandleUpdateImg} variant="info" >Save</Button>
 
+// </div>
 
-// <PaginationCommon
-// pages={{ activePageStatus: activePageStatus, totalNumberPage: totalNumberPage }}
-// detailPage={totalNumberPage}
-// handleGetPagination={handleGetPagination}
-// />
+// {
+//     UrlImage.map((item, key) => {
+//         return (
+//             <div className="item-user" key={key} >
+//                 <img className="image-see" src={ImageUser ? ImageUser : item.avatar} />
+//             </div>
+//         )
+//     })
+// }
+// </div>

@@ -1,6 +1,6 @@
-export default function callApiGet(){
+export default function callApiGet(search){
     return new Promise((resolve,reject)=>{
-        const url='https://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/blogs'
+        const url=`https://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/blogs?search=${search}`
         fetch(url,{
             method:'GET'
         })
@@ -14,3 +14,4 @@ export default function callApiGet(){
         })
     })
 }
+// 'https://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/blogs'
