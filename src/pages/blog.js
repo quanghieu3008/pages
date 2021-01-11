@@ -106,7 +106,7 @@ const Yourself = () => {
         if (content && title && description !== "") {
             addContentAPI(dataNew)
                 .then((res) => {
-                    debugger
+                    // debugger
                     handleGetPagination(pagination);
                     setShowScreenAdd(false);
                     hanldeNextPage()
@@ -118,10 +118,10 @@ const Yourself = () => {
                 });
         }
         else {
-            debugger
-            FormData.validated();
-            alert("Not empty")
-        }
+            // debugger
+            // FormData.validated();
+            alert("Not empty");
+        };
     }
     const updateContent = () => {
         const { content, title, description } = dataNew
@@ -133,13 +133,13 @@ const Yourself = () => {
                     alert("Success!");
                 })
                 .catch((error) => {
-                    alert("Error!")
+                    alert("Error!");
                 });
         }
         else {
-            debugger
-            alert("Not empty")
-        }
+            // debugger
+            alert("Not empty");
+        };
     }
     const onHandleDelete = () => {
 
@@ -147,7 +147,7 @@ const Yourself = () => {
             .then((res) => {
                 handleGetPagination(pagination);
                 setShowModalComfirm(false);
-                setUsersDetailTotal(usersDetailTotal - 1)
+                setUsersDetailTotal(usersDetailTotal - 1);
             })
             .catch((error) => {
                 alert("Error!")
