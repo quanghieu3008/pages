@@ -1,4 +1,5 @@
 export default function updateImgAPI(player){
+    console.log(player);
     return new Promise((resolve,reject)=>{
         const url ='https://5ff2c99828c3980017b189ba.mockapi.io/localhost3001/item/dataImg/'+player.id;
         fetch(url,{

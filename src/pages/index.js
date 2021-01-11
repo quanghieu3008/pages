@@ -4,7 +4,7 @@ import "../style/blog.css"
 import callApiGet from '../fetchAPI/getAPI'
 import Menu from "../components/menu";
 import callApiGetDetail from "../fetchAPI/upDataFile"
-import callApiGetImg from "../fetchAPI/getImgAPI"
+// import callApiGetImg from "../fetchAPI/getImgAPI"
 
 const YourselfProflie = () => {
   const [users, setUsers] = useState([]);
@@ -19,26 +19,15 @@ const YourselfProflie = () => {
       .then(data => setUsers(data.item));
     callApiGetDetail(dataContents)
       .then(dataContent => setUsersDetail(dataContent.items));
-    callApiGetImg()
-      .then(dataImg => setUrlImage(dataImg.items));
+    // callApiGetImg()
+    //   .then(dataImg => setUrlImage(dataImg.items));
   }
   return (
     <div>
       <Menu />
       <div className="container">
         <div className="blog">
-          <div className="img-home">
-            {
-              UrlImage.map((item, key) => {
-                return (
-                  <div className="item-user-home" key={key} >
-                    <img className="image-see-home" src={item.avatar ? item.avatar : ""} />
-                  </div>
-                )
-              })
-            }
-
-          </div>
+     
           {
             users.map((users, key) => {
               return (
@@ -103,3 +92,15 @@ const YourselfProflie = () => {
 }
 export default YourselfProflie
 
+// <div className="img-home">
+// {
+//   UrlImage.map((item, key) => {
+//     return (
+//       <div className="item-user-home" key={key} >
+//         <img className="image-see-home" src={item.avatar ? item.avatar : ""} />
+//       </div>
+//     )
+//   })
+// }
+
+// </div>

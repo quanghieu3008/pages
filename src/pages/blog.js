@@ -67,7 +67,7 @@ const Yourself = () => {
         setDataNew({ ...dataNew, [name]: e.target.value, date: date })
     }
     const onHandleShowAdd = () => {
-        setDataNew({ ...dataNew, content: "", title: "", description: "", id: "" })
+        setDataNew({})
         setShowScreenAdd(true);
         setCheckStatus("Add Content")
     }
@@ -89,6 +89,10 @@ const Yourself = () => {
             getNewPage()
             handleGetPagination({ ...pagination, page: totalSlide + 1 });
         }
+        else {
+            handleGetPagination({ ...pagination, page: totalSlide });
+            setPagination({ ...pagination, page: totalSlide })
+        }
     }
     const getNewPage = () => {
         callApiGetDetail(pagination.search)
@@ -102,6 +106,7 @@ const Yourself = () => {
         if (content && title && description !== "") {
             addContentAPI(dataNew)
                 .then((res) => {
+                    debugger
                     handleGetPagination(pagination);
                     setShowScreenAdd(false);
                     hanldeNextPage()
@@ -112,7 +117,11 @@ const Yourself = () => {
                     alert("Error!");
                 });
         }
-        else alert("Not empty")
+        else {
+            debugger
+            FormData.validated();
+            alert("Not empty")
+        }
     }
     const updateContent = () => {
         const { content, title, description } = dataNew
@@ -127,7 +136,10 @@ const Yourself = () => {
                     alert("Error!")
                 });
         }
-        else alert("Not empty")
+        else {
+            debugger
+            alert("Not empty")
+        }
     }
     const onHandleDelete = () => {
 
@@ -181,7 +193,7 @@ const Yourself = () => {
     return (
         <div >
 
-            <Menu  />
+            <Menu />
             <div className="input-search">
                 <div className="admin-profile">
 
@@ -195,7 +207,6 @@ const Yourself = () => {
                 </div>
 
             </div>
- 
             <div className="list-title">
                 {
                     dataPageToDo.map((item, key) => {
@@ -256,7 +267,7 @@ const Yourself = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form noValidate validated={true} onSubmit={() => updateContent} >
+                    <Form noValidate onSubmit={() => updateContent} >
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Title </Form.Label>
                             <Form.Control minLength={1} maxLength={128} defaultValue={dataNew.title} name="title" type="title" placeholder="Title" required onChange={checkStatus === "Edit Content" ? handleSetContent : handleAddContent} />
@@ -293,21 +304,21 @@ const Yourself = () => {
 export default Yourself
 
 // <div className="input-search">
-// <div>
 //     <div>
-//         <input type="file" onChange={onHandleImage}></input>
+//         <div>
+//             <input type="file" onChange={onHandleImage}></input>
+//         </div>
+//         <Button className="upload-img btn btn-outline-warning" onClick={onHandleUpdateImg} variant="info" >Save</Button>
+
 //     </div>
-//     <Button className="upload-img btn btn-outline-warning" onClick={onHandleUpdateImg} variant="info" >Save</Button>
 
-// </div>
-
-// {
-//     UrlImage.map((item, key) => {
-//         return (
-//             <div className="item-user" key={key} >
-//                 <img className="image-see" src={ImageUser ? ImageUser : item.avatar} />
-//             </div>
-//         )
-//     })
-// }
+//     {
+//         UrlImage.map((item, key) => {
+//             return (
+//                 <div className="item-user" key={key} >
+//                     <img className="image-see" src={ImageUser ? ImageUser : item.avatar} />
+//                 </div>
+//             )
+//         })
+//     }
 // </div>
